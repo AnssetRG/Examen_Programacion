@@ -1,0 +1,15 @@
+El algoritmo devuelve si un número mayor a 2 es primo o no. Si es primo, devolverá "true"; sino, "false".
+
+bool xyz (int n) {
+    float i = math.sqrt(n); //raiz cuadrada de "n"
+    int j = math.ceil(i); //redondeo entero más próximo de "i"
+    int k = 2;
+    int x = k;
+    while(x <= j) {
+        if(!(n % x)) //si el residuo de "n" entre el "x" actual es 0, entonces no será primo mayor a 2
+        return false; //
+        else
+        x++; //si aún no hay división exacta, se sigue evaluando con los siguientes números.
+    }
+    return true;
+}
