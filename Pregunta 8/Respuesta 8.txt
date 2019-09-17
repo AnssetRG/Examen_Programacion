@@ -1,0 +1,34 @@
+Desde una perspectiva de game design, la descripción del evento donde varios enemigos son instanciados y el jugador los elimina,
+ambos de manera recurrente, entonces el género podría ser de un beat-them-up (ejemplos: Double Dragon y Final Fight) o un 
+shoot-them-up/bullet hell (ejemplos, Space Invaders o Tohou). En ambos géneros, la mecánica principal resalta en las acciones del jugador,
+ataques, combos, power-ups, movimiento; y los enemigos tienen movimientos y una IA más simple, a excepción de los bosses. Considerando que
+estamos desarrollando un juego de celular con estos diseños, mi recomendación sería:
+
+1) Hacer un controlador general de enemigos que controle principalmente creación, interacción
+con el jugador y destrucción. El controlador tendrá guardado los enemigos en un ArrayList con
+template de enemigos para agilizar y gastar menos recursos computacionales en el momento de crear,
+destruir y llamar a un enemigo de la lista, ya que es más fácil de trabajar. Asimismo, la creación
+y destrucción de enemigos debe tener pocas operaciones que consuman recursos, ya que en un caso
+consumimos memoria al crear y en el otro liberamos al destruir. De igual manera, se debería
+implementar un diccionario o un hash que permita indexar o llamar más rápido a los enemigos
+durante las interacciones con el jugador (ataques, daño, combos, entre otros).
+
+2) Hacer de las demás operaciones de cada enemigo más simples, por ejemplo, en caso de dirigirse
+al jugador sea mediante una función de procesos simples o un movimiento unidireccional o predeterminado
+hacia un punto ya definido, de igual manera su ataque debe ser simple, pero en el momento de
+hacer una interacción se llama al controlador general.
+
+3)Limitar la creación de los enemigos dependiendo del diseño del nivel. En caso de un bullet hell,
+los enemigos se distribuyen por olas/waves que ya están predefinidas, entonces su creación ya
+está limitada; por otro lado, en un beat-them-up, los enemigos se pueden crear periodicamente y de 
+manera aleatoria, pero se puede limitar con un tamaño o número de enemigos máximo en la lista.
+Luego mientras se destruyen, se podría esperar un breve tiempo o hasta un tamaño sugerido para
+volver a crear enemigos.
+
+4)Implementar polimorfismo para el diseño del script de enemigos. De esta manera, si bien el
+controlador general y el propio de cada instancia de enemigos ejecuta la misma función, por
+efecto del polimorfismo, cada enemigo la ejecuta como su diseño está planteado, variando su
+velocidad, ataque, daño o incluso animaciones.
+
+5) Simplificar la GUI para evitar actualizar información innecesaria que puede bajar
+el rendimiento del juego.

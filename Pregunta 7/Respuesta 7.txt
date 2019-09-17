@@ -1,0 +1,8 @@
+List<Enemy> activeEnemies;
+int N;
+
+
+void ActivateInterLink(Enemy enemyTarget){
+	if(getProbSucceed() >= 25) return
+	
+}
