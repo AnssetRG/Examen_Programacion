@@ -1,8 +1,33 @@
+/*
+...otras variables
+*/
+
 List<Enemy> activeEnemies;
+List<Enemy> EnemiesLinked;
 int N;
 
 
-void ActivateInterLink(Enemy enemyTarget){
-	if(getProbSucceed() >= 25) return
-	
+void ActivateInterLink(Enemy enemyTarget, int prob = 25, int damageToDo = 0){
+	if(getProbSucceed() >= prob || enemyTarget == NULL){
+		EnemiesLinked.clear();
+		return;
+	}
+	EnemiesLinked.add(enemyTarget);
+	enemyTarget.DoDamage(damageToDo);
+	Enemy nextEnemyTarget = getNextTarget(EnemiesLinked, activeEnemies);
+	ActivateInterLink(nextEnemyTarget,10,10)
 }
+
+/*
+...otras funciones
+*/
+
+void OnMeleeAttackConnected(){
+	ActivateInterLink(this.enemy)
+}
+
+Si no se tuviera una lista de enemigos activos en escena, entonces para poder ejecutar el
+Interlink, se podría llamar a una función del controlador de enemigos o de un script general
+que en el momento de que se activará un Interlink, se creara una lista en ese momento
+con todos los GameObjects que tengan un tag de "Enemy", se rescata y guarda esa variable
+durante el ciclo de vida de la función ActivateInterLink y luego de terminar, se elimina.
